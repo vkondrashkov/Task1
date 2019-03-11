@@ -18,78 +18,106 @@ class Task1Tests: XCTestCase {
         super.tearDown()
     }
 
-    func test123Matrix() {
-        let container: [[Int]] = [
+    func testNumPadMatrix() {
+        // Given
+        let matrixBuider: MatrixBuilder = [
             [1, 2, 3],
             [4, 5, 6],
             [7, 8, 9]
         ]
-        let expectedContainer: [[Int]] = [
+        guard let matrix = matrixBuider.build() else {
+            XCTFail()
+            return
+        }
+
+        // When
+        let matrixFormatter = MatrixFormatter(for: matrix)
+        let ascendedMatrix = matrixFormatter.ascendedByModule()
+
+        // Then
+        let container: [[Int]] = [
             [3, 2, 1],
             [6, 5, 4],
             [9, 8, 7]
         ]
-        let matrix = Matrix(container: container)
-        let matrixFormatter = MatrixFormatter(for: matrix)
-        let ascendedMatrix = matrixFormatter.ascendedByModule()
-
-        let expectedMatrix = Matrix(container: expectedContainer)
-        XCTAssertEqual(ascendedMatrix, expectedMatrix, "Matrix ascended is not ascended by module!")
+        let expectedMatrix = Matrix(container: container)
+        XCTAssertEqual(ascendedMatrix, expectedMatrix)
     }
 
     func testEmptyMatrix() {
-        let container: [[Int]] = [
+        // Given
+        let matrixBuilder: MatrixBuilder = [
             []
         ]
-        let expectedContainer: [[Int]] = [
-            []
-        ]
-        let matrix = Matrix(container: container)
-        let matrixFormatter = MatrixFormatter(for: matrix)
-        let ascendedMatrix = matrixFormatter.ascendedByModule()
 
-        let expectedMatrix = Matrix(container: expectedContainer)
-        XCTAssertEqual(ascendedMatrix, expectedMatrix, "Expected empty matrix!")
+        // When
+        let matrix = matrixBuilder.build()
+
+        // Then
+        XCTAssertNil(matrix)
+    }
+
+    func testWrongMatrix() {
+        // Given
+        let matrixBuilder: MatrixBuilder = [
+            [1, 2, 3],
+            [4, 5]
+        ]
+
+        // When
+        let matrix = matrixBuilder.build()
+
+        // Then
+        XCTAssertNil(matrix)
     }
 
     func testAscendedMatrix() {
-        let container: [[Int]] = [
+        // Given
+        let matrixBuilder: MatrixBuilder = [
             [3, 2, 1],
             [6, 5, 4]
         ]
-        let expectedContainer: [[Int]] = [
-            [3, 2, 1],
-            [6, 5, 4]
-        ]
-        let matrix = Matrix(container: container)
+        guard let matrix = matrixBuilder.build() else {
+            XCTFail()
+            return
+        }
+
+        // When
         let matrixFormatter = MatrixFormatter(for: matrix)
         let ascendedMatrix = matrixFormatter.ascendedByModule()
 
-        let expectedMatrix = Matrix(container: expectedContainer)
-        XCTAssertEqual(ascendedMatrix, expectedMatrix, "Matrix ascended is not ascended by module!")
+        // Then
+        let container: [[Int]] = [
+            [3, 2, 1],
+            [6, 5, 4]
+        ]
+        let expectedMatrix = Matrix(container: container)
+        XCTAssertEqual(ascendedMatrix, expectedMatrix)
     }
 
     func testDianaMatrix() {
-        // given
-        let container: [[Int]] = [
+        // Given
+        let matrixBuilder: MatrixBuilder = [
             [15, 0, -4],
             [2, 10, 3],
             [4, 9, 23]
         ]
-        let matrix = Matrix(container: container)
+        guard let matrix = matrixBuilder.build() else {
+            XCTFail()
+            return
+        }
 
-        // when
+        // When
         let matrixFormatter = MatrixFormatter(for: matrix)
         let ascendedMatrix = matrixFormatter.ascendedByModule()
 
-
-        // then
-        let expectedContainer: [[Int]] = [
+        // Then
+        let container: [[Int]] = [
             [-4, 15, 0],
             [3, 2, 10],
             [23, 4, 9]
         ]
-        let expectedMatrix = Matrix(container: expectedContainer)
-        XCTAssertEqual(ascendedMatrix, expectedMatrix, "Matrix ascended is not ascended by module!")
+        let expectedMatrix = Matrix(container: container)
+        XCTAssertEqual(ascendedMatrix, expectedMatrix)
     }
 }
