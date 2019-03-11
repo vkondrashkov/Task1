@@ -9,7 +9,11 @@
 import Foundation
 
 class Matrix {
-    var container: [[Int]] = [[]]
+    private var container: [[Int]] = []
+
+    var content: [[Int]] {
+        return container
+    }
 
     var columnsCount: Int {
         return row(at: 0).count
@@ -24,18 +28,12 @@ class Matrix {
     }
 
     func row(at index: Int) -> [Int] {
-        guard index < container.count else {
-            return []
-        }
         return container[index]
     }
 
     func column(at index: Int) -> [Int] {
         var column: [Int] = []
         for row in container {
-            guard index < row.count else {
-                continue
-            }
             column.append(row[index])
         }
         return column

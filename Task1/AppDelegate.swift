@@ -15,17 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let container = [
-            [2, 5, 6, -5, 0],
-            [10, 20, 30, -28, 0],
-            [-20, 13, 0, 2, 0],
-            [3, 2, 1, 2, 0]
+        let firstMatrixBuilder: MatrixBuilder = [
+            [1, 2, 3],
+            [4, 5, 6]
         ]
-        let matrix = Matrix(container: container)
-        let formatter = MatrixFormatter(for: matrix)
+        let firstMatrix = firstMatrixBuilder.build() // some
 
-        let newMatrix = formatter.ascendedByModule()
-        let test = matrix == newMatrix
+        let secondMatrixBuilder: MatrixBuilder = [
+            [1, 2, 3],
+            [4, 5]
+        ]
+        let secondMatrix = secondMatrixBuilder.build() // nil
+
         return true
     }
 }

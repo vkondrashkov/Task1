@@ -42,7 +42,7 @@ class MatrixFormatter {
     }
 
     private func swapColumns(at firstIndex: Int,_ secondIndex: Int) -> Matrix {
-        var container = matrix.container
+        var container = matrix.content
         for index in 0..<matrix.rowsCount {
             let secondElement = container[index][secondIndex]
             let firstElement = container[index].remove(at: firstIndex)
@@ -55,10 +55,7 @@ class MatrixFormatter {
 
     private func calculateColumnModule(at index: Int) -> Int {
         let column = matrix.column(at: index)
-        var module = 0
-        for element in column {
-            module += abs(element)
-        }
+        let module = column.reduce(0, +)
         return module
     }
 }
