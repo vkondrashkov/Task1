@@ -15,17 +15,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let firstMatrixBuilder: MatrixBuilder = [
+        let firstMatrixContainer = [
             [1, 2, 3],
             [4, 5, 6]
         ]
-        let firstMatrix = firstMatrixBuilder.build() // some
+        let firstMatrix = Matrix(container: firstMatrixContainer)
 
-        let secondMatrixBuilder: MatrixBuilder = [
+        let secondMatrixContainer = [
             [1, 2, 3],
             [4, 5]
         ]
-        let secondMatrix = secondMatrixBuilder.build() // nil
+        let secondMatrix = Matrix(container: secondMatrixContainer)
 
         return true
     }

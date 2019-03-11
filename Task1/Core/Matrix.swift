@@ -23,7 +23,14 @@ class Matrix {
         return column(at: 0).count
     }
 
-    init(container: [[Int]]) {
+    init?(container: [[Int]]) {
+        guard let columnsCount = container.first?.count else {
+            return nil
+        }
+        let unsuitableElements = container.filter { $0.count != columnsCount }
+        guard unsuitableElements.count == 0 else {
+            return nil
+        }
         self.container = container
     }
 
