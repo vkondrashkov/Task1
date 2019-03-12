@@ -20,8 +20,21 @@ class MatrixFormatter {
         self.matrix = matrix
     }
 
-//    TODO:
-//    func ascendedByModule() -> Matrix
+    func ascendedByModule() -> Matrix {
+        var sorted = false
+        while !sorted {
+            sorted = true
+            for index in 0..<(matrix.columnsCount - 1) {
+                let currentColumnModule = calculateColumnModule(at: index)
+                let nextColumnModule = calculateColumnModule(at: index + 1)
+                if currentColumnModule < nextColumnModule {
+                    sorted = false
+                    matrix = swapColumns(at: index, index + 1)
+                }
+            }
+        }
+        return matrix
+    }
 
     private func swapColumns(at firstIndex: Int,_ secondIndex: Int) -> Matrix {
         var container = matrix.content
@@ -32,7 +45,7 @@ class MatrixFormatter {
             container[index].remove(at: secondIndex)
             container[index].insert(firstElement, at: secondIndex)
         }
-        return Matrix(container: container)!
+        return Matrix(container: container) ?? matrix
     }
 
     private func calculateColumnModule(at index: Int) -> Int {

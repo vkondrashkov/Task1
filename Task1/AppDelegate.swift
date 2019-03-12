@@ -15,17 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let firstMatrixContainer = [
-            [1, 2, 3],
-            [4, 5, 6]
-        ]
-        let firstMatrix = Matrix(container: firstMatrixContainer)
-
-        let secondMatrixContainer = [
-            [1, 2, 3],
-            [4, 5]
-        ]
-        let secondMatrix = Matrix(container: secondMatrixContainer)
 
         return true
     }
